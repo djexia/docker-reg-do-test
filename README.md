@@ -1,5 +1,6 @@
 # End Goal
 To build a docker registry with 1. DNS, 2. certs and 3. netfilters 4. Using S3
+* [DigitalOcean cert manager doc](https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-with-cert-manager-on-digitalocean-kubernetes)
 
 <hr>
 
