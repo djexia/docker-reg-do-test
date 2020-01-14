@@ -1,0 +1,33 @@
+# create service and deployment for echo
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: echo1
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: echo1
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echo1
+spec:
+  selector:
+    matchLabels:
+      app: echo1
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: echo1
+    spec:
+      containers:
+      - name: echo1
+        imagePullPolicy: Always
+        image: djexia/echo
+        ports:
+        - containerPort: 80

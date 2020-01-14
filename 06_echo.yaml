@@ -1,0 +1,21 @@
+
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: echo-ingress-cert
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-staging"
+spec:
+  tls:
+  - hosts:
+    - do-testing-echo2.example.com
+    secretName: letsencrypt-staging
+  rules:
+  - host: do-testing-echo2.example.com
+    http:
+      paths:
+      - backend:
+          serviceName: echo1
+          servicePort: 80
