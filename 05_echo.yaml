@@ -11,7 +11,7 @@ spec:
   tls:
   - hosts:
     - do-testing-echo1.example.com
-    secretName: letsencrypt-staging
+    secretName: echo-tls
   rules:
   - host: do-testing-echo1.example.com
     http:
