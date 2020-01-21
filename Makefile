@@ -13,11 +13,48 @@ A list of things you can make:
 	@echo USAGE \"make service\" will do everything
 	@echo
 
+
+
+
+
+
+prereq:
+	wget https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.26.1/deploy/static/provider/cloud-generic.yaml
+	wget https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.26.1/deploy/static/mandatory.yaml
+	wget https://github.com/jetstack/cert-manager/releases/download/v0.12.0/cert-manager.yaml
+
+cheznous:
+	kubectl create namespace ingress-nginx
+	kubectl create namespace cert-manager
+
+	kubectl apply -f cheznous.lb.yaml
+	kubectl apply -f mandatory.yaml
+
+	kubectl apply --validate=false -f cert-manager.yaml
+
+	kubectl apply -f  01_echo.yaml
+	kubectl apply -f  04_echo.yaml
+	kubectl apply -f  05_echo.yaml
+
+
+scrapit:
+	kubectl delete -f cheznous.lb.yaml
+	kubectl delete -f mandatory.yaml
+
+	kubectl delete --validate=false -f cert-manager.yaml
+
+	kubectl delete -f  01_echo.yaml
+	kubectl delete -f  04_echo.yaml
+	kubectl delete -f  05_echo.yaml
+
+
+
+
 status:
 	kubectl get all --all-namespaces
-	kubectl get secrets                    --all-namespaces || echo not present
-	kubectl get customresourcedefinitions  --all-namespaces || echo not present
-	kubectl get configmaps                 --all-namespaces
+	#kubectl get secrets                    --all-namespaces || echo not present
+	#kubectl get customresourcedefinitions  --all-namespaces || echo not present
+	#kubectl get configmaps                 --all-namespaces
 	helm ls
 	kubectl get ClusterIssuer              --all-namespaces || echo not present
 	kubectl get ingress                    --all-namespaces || echo not present
@@ -59,7 +96,7 @@ delete_all: delete_configs
 
 delete_echo:
 	kubectl delete -f 01_echo.yaml -n ${NAMESPACE} || echo not present
-	kubectl delete -f 02_echo.yaml -n ${NAMESPACE} || echo not present
+	#kubectl delete -f 02_echo.yaml -n ${NAMESPACE} || echo not present
 	#kubectl delete -f 03_echo.yaml  || echo not present
 	kubectl delete -f 04_echo.yaml  || echo not present
 	kubectl delete -f 05_echo.yaml -n ${NAMESPACE} || echo not present

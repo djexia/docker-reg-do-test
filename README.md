@@ -14,8 +14,8 @@ To build a docker registry with 1. DNS, 2. certs and 3. netfilters 4. Using S3
     kubectl create namespace ingress-nginx
     wget https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.26.1/deploy/static/provider/cloud-generic.yaml
     wget https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.26.1/deploy/static/mandatory.yaml
-    kubectl apply -f cloud-generic.yaml
     kubectl apply -f mandatory.yaml
+    kubectl apply -f cloud-generic.yaml
     ```
 1. Create cert-manager infra
     ``` bash
